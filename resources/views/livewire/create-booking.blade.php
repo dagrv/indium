@@ -10,9 +10,10 @@
             </select>
         </div>
 
-        <div class="mb-6">
+        <div class="mb-6 {{!$employees->count() ? 'opacity-30' : ''}}">
             <label for="employee" class="inline-block text-black font-semibold mb-2">Select</label>
-            <select name="employee" id="employee" class="bg-white h-10 w-full border-none rounded-lg" wire:model="state.employee">
+            <select name="employee" id="employee" class="bg-white h-10 w-full border-none rounded-lg" wire:model="state.employee"
+                {{ !$employees->count() ? 'disabled="disabled"' : ''}}>
                 <option value="">Employee</option>
                 @foreach ($employees as $employee)
                     <option value="{{ $employee->id }}">{{ $employee->name }}</option>
