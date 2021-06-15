@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Employee;
 use App\Models\Service;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class CreateBooking extends Component
         $this->employees = collect();
     }
 
+    // --- Livewire Updated Lifecycle Component (Cached)
     public function updatedStateService($serviceId)
     {
         $this->state['employee'] = '';
@@ -31,6 +33,7 @@ class CreateBooking extends Component
         $this->employees = $this->selectedService->employees;
     }
 
+    // --- SERVICE ---
     public function getSelectedServiceProperty()
     {
         if (!$this->state['service']) {
@@ -38,6 +41,16 @@ class CreateBooking extends Component
         }
 
         return Service::find($this->state['service']);
+    }
+
+    // --- EMPLOYEE ---
+    public function getSelectedEmployeeProperty()
+    {
+        if (!$this->state['employee']) {
+            return null;
+        }
+
+        return Employee::find($this->state['employee']);
     }
 
     public function render()
