@@ -25,8 +25,8 @@
 
         <div class="mb-6 {{!$this->selectedService || !$this->selectedEmployee ? 'opacity-30' : ''}}">
             <label for="employee" class="inline-block text-black font-semibold mb-2">Appointment Time</label>
-        </div>
 
-        <livewire:booking-calendar />
+            <livewire:booking-calendar :service="$this->selectedService" :employee="$this->selectedEmployee" :key="optional($this->selectedEmployee)->id" />
+        </div>
     </form>
 </div>
