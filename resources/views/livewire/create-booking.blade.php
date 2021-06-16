@@ -1,5 +1,5 @@
 <div class="bg-gray-100 max-w-lg mx-auto m-6 p-5 rounded-lg">
-    <form>
+    <form wire:submit.prevent="createBooking">
         <!-- Bloc 1 - Service -->
         <div class="mb-6">
             <label for="service" class="inline-block text-black font-semibold mb-2">Service</label>
@@ -36,11 +36,25 @@
                 </div>
 
                 <div class="border-t border-b border-gray-200 py-2">
-                    Overview: <br><br> {{ $this->selectedService->name }} - {{ $this->selectedService->duration }} minutes with {{ $this->selectedEmployee->name }}
-                    <br> 📅  {{ $this->timeObject->format('D jS M Y') }}
-                    <br> 🕰  {{ $this->timeObject->format('H:i') }}
+                    {{ $this->selectedService->name }} - {{ $this->selectedService->duration }} minutes with {{ $this->selectedEmployee->name }}
+                    <br> 📅 &nbsp; {{ $this->timeObject->format('D jS M Y') }}
+                    <br> 🕰 &nbsp; {{ $this->timeObject->format('H:i') }}
                 </div>
             </div>
+
+            <div class="mb-6">
+                <div class="mb-3">
+                    <label for="name" class="inline-block text-black font-semibold mb-2">Name</label>
+                    <input type="text" name="name" id="name" class="bg-white h-10 w-full border-none rounded-lg" wire:model.defer="state.name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="inline-block text-black font-semibold mb-2">Email</label>
+                    <input type="text" name="email" id="email" class="bg-white h-10 w-full border-none rounded-lg" wire:model.defer="state.email">
+                </div>
+            </div>
+
+            <button type="submit" class="bg-green-500 text-white h-11 px-4 text-center font-semibold rounded-md w-full">Reserve</button>
         @endif
     </form>
 </div>
