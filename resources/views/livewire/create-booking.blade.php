@@ -9,7 +9,7 @@
             <select name="service" id="service" class="bg-white h-10 w-full border-none rounded-lg" wire:model="state.service">
                 <option value="">Please Select</option>
                 @foreach ($services as $service)
-                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                    <option value="{{ $service->id }}">{{ $service->name }} - {{ $service->duration }} minutes</option>
                 @endforeach
             </select>
         </div>
