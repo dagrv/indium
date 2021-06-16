@@ -12,6 +12,7 @@ class BookingCalendar extends Component
     public $calendarStartDate = [];
     public $employee;
     public $service;
+    public $time;
 
     public function mount()
     {

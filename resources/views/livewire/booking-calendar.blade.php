@@ -32,16 +32,18 @@
     <div class="max-h-52 overflow-y-scroll">
         @if ($this->availableTimeSlots->count())
             @foreach ($this->availableTimeSlots as $slot)
-                <input type="radio" name="time" id="" value="" class="sr-only">
+                <input type="radio" name="time" id="time_{{ $slot->timestamp }}" value="{{ $slot->timestamp }}" class="sr-only" wire:model="time">
 
-                <label for="" class="w-full text-left focus:outline-none px-4 py-2 flex items-center border-b border-gray-200">
-                    {{-- <svg class="w-6 h-6 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> --}}
+                <label for="time_{{ $slot->timestamp }}" class="w-full text-left focus:outline-none px-4 py-2 flex items-center border-b border-gray-200">
+                    @if($slot->timestamp == $time)
+                        <svg class="w-6 h-6 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    @endif
                     {{ $slot->format('H:i') }}
                 </label>
             @endforeach
         @else
             <div class="text-center text-red-600 px-4 py-2">
-                Nothing Available
+                Sorry, Nothing Available
             </div>
         @endif
     </div>
