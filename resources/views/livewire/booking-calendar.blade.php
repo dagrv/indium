@@ -29,7 +29,7 @@
         @endforeach
     </div>
 
-    <div class="max-h-52 overflow-y-scroll">
+    <div class="max-h-60 overflow-y-scroll">
         @if ($this->availableTimeSlots->count())
             @foreach ($this->availableTimeSlots as $slot)
                 <input type="radio" name="time" id="time_{{ $slot->timestamp }}" value="{{ $slot->timestamp }}" class="sr-only" wire:model="time">

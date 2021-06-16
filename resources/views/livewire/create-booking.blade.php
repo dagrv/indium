@@ -1,5 +1,8 @@
 <div class="bg-gray-100 max-w-lg mx-auto m-6 p-5 rounded-lg">
     <form>
+
+        {{ var_dump($state) }}
+
         <!-- Bloc 1 - Service -->
         <div class="mb-6">
             <label for="service" class="inline-block text-black font-semibold mb-2">Service</label>

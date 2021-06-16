@@ -13,6 +13,7 @@ class CreateBooking extends Component
     public $state = [
         'service' => '',
         'employee' => '',
+        'time' => ''
     ];
 
     public function mount()
@@ -20,7 +21,16 @@ class CreateBooking extends Component
         $this->employees = collect();
     }
 
-    // --- Livewire Updated Lifecycle Component (Cached)
+    protected $listeners = [
+        'updated-booking-time' => 'setTime'
+    ];
+
+    public function setTime($time)
+    {
+        $this->state['time'] = $time;
+    }
+
+    // Livewire Updated Lifecycle Component (Cached)
     public function updatedStateService($serviceId)
     {
         $this->state['employee'] = '';
@@ -30,10 +40,21 @@ class CreateBooking extends Component
             return;
         }
 
+        $this->clearTime();
         $this->employees = $this->selectedService->employees;
     }
 
-    // --- SERVICE ---
+    public function updatedStateEmployee()
+    {
+        $this->clearTime();
+    }
+
+    public function clearTime()
+    {
+        $this->state['time'] = '';
+    }
+
+    // SERVICE
     public function getSelectedServiceProperty()
     {
         if (!$this->state['service']) {
@@ -43,7 +64,7 @@ class CreateBooking extends Component
         return Service::find($this->state['service']);
     }
 
-    // --- EMPLOYEE ---
+    // EMPLOYEE
     public function getSelectedEmployeeProperty()
     {
         if (!$this->state['employee']) {
@@ -59,7 +80,6 @@ class CreateBooking extends Component
 
         return view('livewire.create-booking', [
             'services' => $services
-        ])
-            ->layout('layouts.guest');
+        ])->layout('layouts.guest');
     }
 }

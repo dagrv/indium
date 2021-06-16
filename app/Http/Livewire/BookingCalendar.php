@@ -21,6 +21,11 @@ class BookingCalendar extends Component
         $this->setDate(now()->timestamp);
     }
 
+    public function updatedTime($time)
+    {
+        $this->emitUp('updated-booking-time', $time);
+    }
+
     public function getEmployeeScheduleProperty()
     {
         return $this->employee->schedules()
