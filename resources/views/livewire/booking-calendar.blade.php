@@ -17,12 +17,12 @@
 
     <div class="flex justify-between items-center px-3 border-b border-gray-300 pb-2">
         @foreach($this->calendarWeekInterval as $day)
-            <button type="button" class="text-center group focus:outline-none">
+            <button type="button" class="text-center group focus:outline-none" wire:click="setDate({{ $day->timestamp }})">
                 <div class="text-md leading-none mb-2 text-gray-700">
                     {{ $day->format('D') }}
                 </div>
 
-                <div class="text-lg leading-none p-1 text-black group-hover:text-white bg-gray-300 font-semibold rounded-full w-9 h-9 group-hover:bg-red-600 flex items-center justify-center">
+                <div class="text-lg leading-none p-1 text-black group-hover:text-white bg-gray-300 font-semibold rounded-full w-9 h-9 group-hover:bg-red-600 flex items-center justify-center {{ $date === $day->timestamp ? 'bg-red-600 text-white' : '' }}">
                     {{ $day->format('d') }}
                 </div>
             </button>
@@ -34,7 +34,7 @@
 
         <label for="" class="w-full text-left focus:outline-none px-4 py-2 flex items-center border-b border-gray-200">
             <svg class="w-6 h-6 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            
+
             13:00
         </label>
 
