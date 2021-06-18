@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class Appointment extends Model
@@ -16,12 +17,14 @@ class Appointment extends Model
         'end_time',
         'client_name',
         'client_email',
+        'cancelled_at'
     ];
 
     protected $casts = [
-        'date' => 'datetime',
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
+        'date'          => 'datetime',
+        'start_time'    => 'datetime',
+        'end_time'      => 'datetime',
+        'cancelled_at'  => 'datetime'
     ];
 
     public static function booted()
@@ -30,6 +33,16 @@ class Appointment extends Model
             $model->uuid = Str::uuid();
             $model->token = Str::random(32);
         });
+    }
+
+    public function scopeNotCancelled(Builder $builder)
+    {
+        $builder->whereNull('cancelled_at');
+    }
+
+    public function isCancelled()
+    {
+        return !is_null($this->cancelled_at);
     }
 
     public function service()
