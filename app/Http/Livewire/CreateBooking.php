@@ -43,7 +43,7 @@ class CreateBooking extends Component
     public function createBooking()
     {
         $this->validate();
-        
+
         $appointment = Appointment::make([
             'date'         => $this->timeObject->toDateString(),
             'start_time'   => $this->timeObject->toTimeString(),
@@ -56,6 +56,8 @@ class CreateBooking extends Component
         $appointment->employee()->associate($this->selectedEmployee);
 
         $appointment->save();
+
+        return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
 
     public function setTime($time)
